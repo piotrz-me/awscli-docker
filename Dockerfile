@@ -9,6 +9,10 @@ ENV AWS_IAM_AUTH_VERSION 0.4.0
 COPY entrypoint.sh entrypoint.sh
 COPY commands.sh /commands.sh
 
+RUN mkdir /aws
+VOLUME /aws
+WORKDIR /aws
+
 RUN apk update && apk add --update --no-cache ca-certificates gnupg openssl curl bash && \
     apk --update --no-cache add python3  && \
     pip3 install awscli==${AWSCLI_VERSION} && \
