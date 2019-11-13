@@ -8,6 +8,7 @@ AWS CLI + terraform + kubectl as docker
 - terraform
 - kubectl
 - yq
+- eksctl
 
 ## USAGE 
 
