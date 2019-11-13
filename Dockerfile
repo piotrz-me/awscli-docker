@@ -8,10 +8,12 @@ ENV AWS_IAM_AUTH_VERSION 0.4.0
 
 COPY entrypoint.sh entrypoint.sh
 COPY commands.sh /commands.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 RUN mkdir /aws
 VOLUME /aws
 WORKDIR /aws
+ENV HOME /aws
 
 RUN apk update && apk add --update --no-cache ca-certificates gnupg openssl curl bash && \
     apk --update --no-cache add python3  && \
@@ -39,7 +41,5 @@ RUN curl --silent -LO https://github.com/kubernetes-sigs/aws-iam-authenticator/r
 RUN curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp && \
     mv /tmp/eksctl /usr/bin && \
     chmod +x /usr/bin/eksctl
-
-
-ENTRYPOINT ["/entrypoint.sh"]
+ 
 
